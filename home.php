@@ -25,7 +25,7 @@ try {
     $r->execute();
     $langue =  $r->fetchAll();
 } catch (PDOException $e) {
-    echo "Erreur e selection des clients   " . $e->getMessage();
+    echo "Erreur e selection des langues  " . $e->getMessage();
 }
 
 try {
@@ -41,7 +41,7 @@ try {
     $r->execute();
     $etudiants =  $r->fetch();
 } catch (PDOException $e) {
-    echo "Erreur e selection des clients   " . $e->getMessage();
+    echo "Erreur e selection des etudiant   " . $e->getMessage();
 }
 
 try {
@@ -174,7 +174,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 tel: <input type="number" name="tel" id="tel" class=" form-control">
                                             </div>
                                             <div class="mb-3">
-                                                langue: <input type="number" name="langue_id" id="id" class=" form-control">
+                                                Langues: <select name="langue_id" id="id" class="form-control" required>
+                                                    <option value="" selected>....</option>
+                                                    <?php
+                                                    foreach ($langue as $c) { 
+                                                        echo "<option value=' ".$c['id']." '  > ".$c['nom_lang']." <option>";
+
+                                                        
+
+                                                         } ?>
+
+                                                </select>
                                             </div>
                                             <div class="mb-3 text-center">
                                                 <button type="submit" class="btn btn-primary col-md-6">Modifier</button>
@@ -225,7 +235,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 tel: <input type="number" name="tel" id="tel" class="form-control">
                                             </div>
                                             <div class="mb-3">
-                                                Langues: <select type="number" name="langue_id" id="id" class="form-control" required>
+                                                Langues: <select  name="langue_id" id="id" class="form-control" required>
                                                     <option value="" selected>....</option>
                                                     <?php
                                                     foreach ($langue as $c) { ?>

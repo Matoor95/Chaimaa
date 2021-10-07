@@ -20,8 +20,7 @@ try {
     //code...
   
 
-$id = $_POST['id_etudiant'];
-        
+$id = $_POST['id_etudiant'];   
 $fname = $_POST['nom'];
 $lname = $_POST['prenom'];
 $email = $_POST['email'];
@@ -31,11 +30,12 @@ $tel = $_POST['tel'];
 $id_langue=$_POST['langue_id'];
 $cnx=connecter_db();
 
-$r=$cnx->prepare("update  id_etudiant, nom, prenom, adresse, nom_lang from etudiant, inscris,langues
- where etudiant.id_etudiant=inscris.id_etudiant 
-and inscris.id=langues.id");
-$r->execute([$fname,$lname,$email,$adresse,$cin,$tel,$id_langue,$id]);
-header("location:home.php");
+$r=$cnx->prepare("UPDATE etudiant   JOIN  inscris   ON etudiant.id_etudiant = inscris.id_etudiant SET etudiant.nom ='$fname',etudiant.prenom ='$lname',etudiant.adresse ='$adresse',etudiant.tel ='$tel',etudiant.email ='$email',etudiant.cin ='$cin', 
+inscris.id ='$id_langue'
+WHERE etudiant.id_etudiant='$id'");
+$r->execute([$id,$fname,$lname,$email,$adresse,$cin,$tel,$id_langue]);
+ header("location:home.php");
+
 }
 
 catch (PDOException $e) {

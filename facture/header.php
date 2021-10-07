@@ -1,11 +1,11 @@
 
 
-<link rel="stylesheet" href="Bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="Bootstrap/css/style.css">
+<link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="../Bootstrap/css/style.css">
 
-<script src="Bootstrap/js/jquery-3.5.1.min.js"></script>
-<script src="Bootstrap/js/bootstrap.bundle.js"></script>
-<script src="Bootstrap/js/bootstrap.min.js"></script>
+<script src="../Bootstrap/js/jquery-3.5.1.min.js"></script>
+<script src="../Bootstrap/js/bootstrap.bundle.js"></script>
+<script src="../Bootstrap/js/bootstrap.min.js"></script>
 
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -16,28 +16,11 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="home.php" class="nav-link">Home</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Facture</a>
-        </li>
+        
     </ul>
-
-    <!-- SEARCH FORM -->
-    <!-- <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form> -->
-
-    <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link" href="disconnect.php"> <i class="fas fa-sign-out-alt"></i> &nbsp; Se deconnecter
+            <a class="nav-link" href="../disconnect.php"> <i class="fas fa-sign-out-alt"></i> &nbsp; Se deconnecter
             </a>
         </li>
 
@@ -52,14 +35,14 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="home.php" class="brand-link">
-        <img src="dist/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-4" style="opacity: .7">
+        <img src="../dist/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-4" style="opacity: .7">
         <span class="brand-text font-weight-light">gesformation</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-
+    
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -76,39 +59,36 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <!--lien vers la page d'ajoute d'utilisateur-->
-                            <a href="langue/create.php" class="nav-link" id="bouton_ajouter">
-                            <i class="fas fa-language"></i> &nbsp; Statistique langues
+                            <a href="create.php" class="nav-link" id="bouton_ajouter">
+                            <i class="fas fa-language"></i> Statistique langues
                             </a>
 
                         </li>
-
                         <li class="nav-item">
                             <!--lien vers la page d'ajoute d'utilisateur-->
-                            <a href="langue/lsl.php" class="nav-link" id="bouton_ajouter">
+                            <a href="lsl.php" class="nav-link" id="bouton_ajouter">
                             <i class="fas fa-list-ul"></i> liste de langues
                             </a>
 
                         </li>
-
                         <li class="nav-item">
-                            <a href="home.php" class="nav-link">
+                            <a href="../home.php" class="nav-link">
                             <i class="fas fa-user-graduate"></i>
                                 <p>Etudiant</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="ls.php" class="nav-link">
+                            <a href="../ls.php" class="nav-link">
                             <i class="fas fa-list-ol"></i>
                                 <p>Liste des étudiants</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="facture/create.php" class="nav-link">
+                            <a href="../fac.php" class="nav-link">
                             <i class="fas fa-user-graduate"></i>
                                 <p>Facturation</p>
                             </a>
                         </li>
-
                     </ul>
                 </li>
 

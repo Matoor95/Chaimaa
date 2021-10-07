@@ -84,7 +84,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../fac.php" class="nav-link">
+                            <a href="../facture/create.php" class="nav-link">
                             <i class="fas fa-user-graduate"></i>
                                 <p>Facturation</p>
                             </a>
