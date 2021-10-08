@@ -90,8 +90,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body>
-    <div class="wrapper">
+<body >
+    <div class="wrapper" style="overflow-x: hidden;">
 
         <!-- Navbar -->
         <?php
@@ -128,19 +128,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#etudiant">
                             Ajouter un étudiant
                         </button>
-                        <div class="col-md-4   mt-3 p-3">
-                            <?php
-                            if (isset($_GET['m']) && $_GET['m'] == 'done') { ?>
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <div class="icon hidden-xs">
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                    Ajouter ajoutée avec succés
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-
-                            <?php } ?>
-                        </div>
                         <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -300,7 +287,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <td scope="row"><?= $p['tel'] ?></td>
                                     <td scope="row"><?= $p['nom_lang'] ?></td>
 
-                                    <td><a class="btn btn-sm btn-danger" href="delete.php?id=<?= $p['id_etudiant'] ?>" onclick="return confirm('voulez vous supprimer ?')"><i class="fas fa-user-minus"></i></a></td>
+                                    <td><a class="btn btn-sm btn-danger" href="delete.php?id=<?= $p['id_etudiant'] ?>" onclick="return confirm('voulez vous supprimer ?')"><i class="fas fa-trash"></i></a></td>
                                     <td> <button type="button" class="btn btn-success editbtn" data-bs-toggle="modal"><i class="fa fa-edit"></i></button>
                                     </td>
                                     <td><a class="btn btn-sm btn-success" href="fac.php?id=<?= $p['id_etudiant'] ?>" onclick="return confirm('voulez vous passer a la facturation ?')"><i class="fas fa-file-invoice-dollar"></i></a></td>

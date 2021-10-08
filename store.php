@@ -3,6 +3,7 @@ define('BASE', $_SERVER['DOCUMENT_ROOT']);
 // echo BASE;
 // print_r(BASE);
 include(BASE."/chaimaa/function.php");
+start_session();
 try{
 
     // recuperer les donnees du formulaires (par leurs name )
@@ -26,10 +27,12 @@ try{
     $r=$cnx->prepare("insert into inscris (id,id_etudiant) values(?,?)");
     //execution de la requete 
     $r->execute([$id,$id_etd]);
+    $_SESSION['message1']="etudiant ajouté avec succés";
+    $_SESSION['status']="success";
 
 }catch (PDOException $e) {
-    echo "Erreur d'ajout de la etd   ".$e->getMessage() ;
+    echo "Erreur d'ajout de la etudiant   ".$e->getMessage() ;
 }
-header("location:home.php?m=done")
+header("location:home.php");
 
 ?>

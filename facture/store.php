@@ -19,10 +19,10 @@ try{
     $r=$cnx->prepare("insert into facture(date,id_etudiant) values(?,?)");
     //execution de la requete 
     $r->execute([$datefacture,$etudiant_id]);
-    // header("location:create.php");
-    // $_SESSION['message1']="facture  ajoutée avec succés";
-    // $_SESSION['status']="success";
     header("location:create.php");
+    $_SESSION['message1']="facture  ajoutée avec succés";
+    $_SESSION['status']="success";
+    
 }catch (PDOException $e) {
     echo "Erreur d'ajout de la facture   ".$e->getMessage() ;
 }

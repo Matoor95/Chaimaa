@@ -81,19 +81,19 @@ $results = $query->fetchAll();
 
     <div class="container">
         <div class="page-header">
-            <h1>Invoice Template </h1>
+            <h1>Facture </h1>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 body-main">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-4"> <img class="img" alt="Invoce Template" src="../dist/img/sagnsema.jpeg" /> </div>
+                            <div class="col-md-4"> <img class="img" alt="Invoce Template" src="../dist/img/AdminLTELogo.png" /> </div>
                             <div class="col-md-8 text-right">
-                                <h4 style="color:#5c486a"><strong>sagnsema Design</strong></h4>
-                                <p> Dakar cite cse, 11000, Sénégal</p>
-                                <p>TEL: +221 77 503 44 08</p>
-                                <p>sagnsema@gmail.com</p>
+                                <h4 style="color:#5c486a"><strong>ECLIPSE</strong></h4>
+                                <p> Oulfa, 2100, Casablanca</p>
+                                <p>TEL: +212 06 32 47 87</p>
+                                <p>chaimaa@gmail.com</p>
                             </div>
                         </div> <br />
                         <div class="row">

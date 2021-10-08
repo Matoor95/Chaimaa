@@ -18,7 +18,6 @@ if (checker($_SESSION['email'], $_SESSION['password']) == false) {
 
 try {
     //code...
-  
 
 $id = $_POST['id_etudiant'];   
 $fname = $_POST['nom'];
@@ -34,6 +33,8 @@ $r=$cnx->prepare("UPDATE etudiant   JOIN  inscris   ON etudiant.id_etudiant = in
 inscris.id ='$id_langue'
 WHERE etudiant.id_etudiant='$id'");
 $r->execute([$id,$fname,$lname,$email,$adresse,$cin,$tel,$id_langue]);
+$_SESSION['message1']="mise à jour  avec succés";
+$_SESSION['status']="success";
  header("location:home.php");
 
 }
@@ -43,7 +44,5 @@ catch (PDOException $e) {
     echo "erreur de modif ".$e->getMessage();
 
 }
-
-
 
 ?>

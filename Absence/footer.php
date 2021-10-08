@@ -4,13 +4,13 @@
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-<footer class="main-footer bg-light  fixed-bottom">
+<footer class="main-footer bg-light ">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-        
+    
     </div>
     <!-- Default to the left -->
-    <strong> Copyright &copy; <strong>Chaimaa</strong>
+    <strong> Copyright &copy; <strong>Chaimaa </strong>
         
 </footer>
 <!-- REQUIRED SCRIPTS -->
