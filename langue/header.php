@@ -35,7 +35,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="home.php" class="brand-link">
-        <img src="../dist/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-4" style="opacity: .7">
+        <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-4" style="opacity: .7">
         <span class="brand-text font-weight-light">gesformation</span>
     </a>
 
@@ -87,6 +87,12 @@
                             <a href="../facture/create.php" class="nav-link">
                             <i class="fas fa-user-graduate"></i>
                                 <p>Facturation</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../Absence/create.php" class="nav-link">
+                            <i class="fas fa-user-graduate"></i>
+                                <p>Absence</p>
                             </a>
                         </li>
                     </ul>

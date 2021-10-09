@@ -121,7 +121,7 @@ $results = $query->fetchAll();
 
                                     <tr>
                                         <td class="col-md-9"><?= $f['nom'] ?> <?= $f['prenom'] ?></td>
-                                        <td class="col-md-3"></i> <?= $f['lang_prix'] ?> cfa</td>
+                                        <td class="col-md-3"></i> <?= $f['lang_prix'] ?> Mad</td>
                                         <td class="col-md-3"></i> <?= $f['nom_lang'] ?></td>
 
                                         
@@ -141,7 +141,7 @@ $results = $query->fetchAll();
                                             <h4><strong>Total:</strong></h4>
                                         </td>
                                         <td class="text-left">
-                                            <h4><strong><?=$f['lang_prix']?></strong> CFA</h4>
+                                            <h4><strong><?=$f['lang_prix']?></strong> Mad</h4>
                                         </td>
                                     </tr>
                                 </tbody>

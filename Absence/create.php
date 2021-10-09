@@ -1,5 +1,3 @@
-
-
 <?php
 define('BASE', $_SERVER['DOCUMENT_ROOT']);
 // echo BASE;
@@ -14,39 +12,57 @@ if (checker($_SESSION['email'], $_SESSION['password']) == false) {
 }
 ?>
 <?php
-//requete pour ajouter facture a un clients
+
+
 try {
 
     //connexion bd
     $cnx = connecter_db();
 
     // preparation de la requete sql
-    $r = $cnx->prepare("select * from etudiant order by nom ");
+    $r = $cnx->prepare("select * from langues order by nom_lang ");
     //execution de la requete 
     $r->execute();
-    $etudiant =  $r->fetchAll();
+    $langue =  $r->fetchAll();
+} catch (PDOException $e) {
+    echo "Erreur e selection des langues  " . $e->getMessage();
+}
+
+try {
+
+    //connexion bd
+
+
+    $cnx = connecter_db();
+
+    // preparation de la requete sql
+    $r = $cnx->prepare("select * from etudiant ");
+    //execution de la requete 
+    $r->execute();
+    $etudiants =  $r->fetchAll();
 } catch (PDOException $e) {
     echo "Erreur e selection des etudiant   " . $e->getMessage();
 }
-//requete pour afficher les client avec les données de la facture 
 
 try {
+
+
+
 
     //connexion bd
     $cnx = connecter_db();
 
     // preparation de la requete sql
-    $r = $cnx->prepare("select * from etudiant, inscris,langues, facture  where etudiant.id_etudiant=inscris.id_etudiant and inscris.id=langues.id and etudiant.id_etudiant=facture.id_etudiant");
+    $r = $cnx->prepare("select e.*, l.*,a.* from etudiant e join inscris i on e.id_etudiant=i.id_etudiant join  langues l on l.id=i.id join absence a on a.id_etudiant=e.id_etudiant");
     //execution de la requete 
     $r->execute();
-    $facture =  $r->fetchAll();
+    $etudiant = $r->fetchAll();
 } catch (PDOException $e) {
-    echo "Erreur e selection des clients   " . $e->getMessage();
+    echo "Erreur     " . $e->getMessage();
 }
 
-
-
 ?>
+
 
 <!DOCTYPE html>
 <!--
@@ -60,7 +76,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>GesCOuture</title>
+    <title>Gesformation</title>
 
     <!-- Font Awesome Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -75,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper" style="overflow-x: hidden;">
 
         <!-- Navbar -->
         <?php
@@ -87,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1 class="m-0 text-dark">Ajouter une facture </h1>
+                <!-- <h1 class="m-0 text-dark"> </h1> -->
                 <!-- /.col -->
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="home.php">Home</a></li>
@@ -100,117 +116,175 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <section class="content">
+            <section class="container">
                 <!--lien vers la page d'ajoute d'utilisateur-->
                 <!-- <a href="#" class="btn btn-large btn-info" id="bouton_ajouter">
                     <i class="fas fa-plus"></i> &nbsp; Ajouter un client
                 </a> -->
-
-
-
                 <div class="row">
+
                     <div class="col-md-12 col-xs-12">
-                        <form action="store.php" method="POST">
-                            <div class="mb-3">
-                                <label class="form-label">Date de la facture</label>
-                                <input type="date" name="date_facture" id="date_facture" class="form-control" required>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#etudiant">
+                            Ajouter une absence
+                        </button>
+                        <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modifier une absence </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form method="post" action="update.php">
+                                            <!--creation de la form avec la met hod post-->
+                                            <div class="mb-3">
+                                                <input type="hidden" name="id_etudiant" id="id_etudiant">
+                                            </div>
+                                            <div class="mb-3">
+                                                nom: <input type="text" name="nom" id="nom" class="form-control">
+                                            </div>
+                                            <div class="mb-3">
+                                                Prenom: <input type="text" name="prenom" id="prenom" class=" form-control">
+                                            </div>
+                                            <div class="mb-3">
+                                                date: <input type="date" name="date_abs" id="date" class=" form-control">
+                                            </div>
+                                            <div class="mb-3 text-center">
+                                                <button type="submit" class="btn btn-primary col-md-6">Modifier</button>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">etudiant</label>
-                                <select  name="id_etudiant" id="id_etudiant" required>
-                                    <option value="" selected>....</option>
-                                    <?php
-                                    foreach ($etudiant as $c) { ?>
-
-                                        <option value="<?= $c['id_etudiant'] ?>"><?= $c['nom'] ?>  <?= $c['prenom'] ?></option>
-
-                                    <?php  } ?>
+                        </div>
 
 
-                                </select>
 
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="etudiant" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter une absence </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form method="post" action="store.php">
+                                            <!--creation de la form avec la met hod post-->
+                                            <div class="mb-3">
+                                                Etudiant: <select name="id_etudiant" id="id_etudiant" class="form-control" required>
+                                                    <option value="" selected>....</option>
+                                                    <?php
+                                                    foreach ($etudiants as $e) { ?>
+
+                                                        <option value="<?= $e['id_etudiant'] ?>"><?= $e['nom'] ?> <?=$e['prenom']?></option>
+
+                                                        <?php  } ?>F
+
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                Date: <input type="date" name="date" id="date" class="form-control">
+                                            </div>
+
+                                            <div class="mb-3 text-center">
+                                                <button class="btn btn-primary col-md-6">Valider</button>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
                             </div>
-
-                            <!-- <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                     </div> -->
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        </div>
 
                     </div>
+
                 </div>
+
+
+
+
                 <div class="col-md-12 col-xs-12">
-
-
-
-
-                    <table class="table table-bordered" id="facture" widh="100">
+                    <h3 class="text-center my-5  text-primary">
+                        Liste des absences
+                    </h3>
+                    <table class="table table-tripped" id="matar">
                         <thead>
                             <tr>
-                                <th scope="col">Num Facture</th>
-                                <th scope="col">Date de la facture</th>
-                                <th scope="col">nom prenom</th>
-                                <th scope="col">tele</th>
-                                <th scope="col">Prix</th>
-                                <th scope="col">email</th>
-                                <th class="text-center"><i class="fas fa-print"></i></th>
+                                <th scope="col">#</th>
+                                <th scope="col">nom</th>
+                                <th scope="col">prenom</th>
+                                <th scope="col">date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $total = 0;
-                            foreach ($facture as $ligne) {
-                                $total = $total +   $ligne['lang_prix'];
-                            ?>
+                            <?php foreach ($etudiant as $p) { ?>
                                 <tr>
-                                    <td scope="col"><?= $ligne['numero_fact'] ?></td>
-                                    <td scope="col"><?= $ligne['date'] ?></td>
-                                    <td scope="col"><?= $ligne['nom'] ?> <?= $ligne['prenom'] ?></td>
-                                    <td scope="col"><?= $ligne['tel'] ?></td>
-                                    <td scope="col"><?= $ligne['email'] ?></td>
-                                    <td scope="col"><?= $ligne['lang_prix'] ?></td>
-                                    
-                                    <td scope="col"><a target="_blanck" href="print.php?numero_fact=<?= $ligne['numero_fact']; ?>"><i class="fa fa-print"></i> </a></td>
-
-
+                                <td scope="row"><?= $p['id_etudiant'] ?></td>
+                                    <td scope="row"><?= $p['nom'] ?></td>
+                                    <td scope="row"><?= $p['prenom'] ?></td>
+                                    <td scope="row"><?= $p['date_abs'] ?></td>
+                                    <td><a class="btn btn-sm btn-danger" href="delete.php?id=<?= $p['id_etudiant'] ?>" onclick="return confirm('voulez vous supprimer ?')"><i class="fas fa-trash"></i></a></td>
+                                    <td> <button type="button" class="btn btn-success editbtn" data-bs-toggle="modal"><i class="fa fa-edit"></i></button>
+                                    </td>
                                 </tr>
                             <?php } ?>
 
                         </tbody>
-
                     </table>
-
                 </div>
+
+
             </section>
 
 
-
-
-
-
-
-
-            <!-- /.content -->
         </div>
 
-        <!-- /.content-wrapper -->
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
-        </aside>
-        <!-- /.control-sidebar -->
 
-        <!-- Main Footer -->
-        <?php
-        include_once "footer.php";
 
-        ?>
+
+
+
+
+
+        <!-- /.content -->
+    </div>
+
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+            <h5>Title</h5>
+            <p>Sidebar content</p>
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <?php
+    include_once "footer.php";
+
+    ?>
     </div>
     </div>
     <!-- ./wrapper -->
@@ -223,7 +297,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     ?>
     <script>
         $(document).ready(function() {
-            $('#facture').DataTable({
+            $('#matar').DataTable({
 
                 lengthMenu: [
                     [5, 10, 25, 50, 100, -1],
@@ -236,13 +310,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 language: {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
                 },
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-                dom: "<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>" +
-                    "<'row'<'col-md-12'tr>>" +
-                    "<'row'<'col-md-5'i><'col-md-7'p>>",
 
                 // autoWidth: false,
 
+            });
+        });
+
+        $(document).ready(function() {
+
+            $('.editbtn').on('click', function() {
+
+                $('#edit').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#id_etudiant').val(data[0]);
+                $('#nom').val(data[1]);
+                $('#prenom').val(data[2]);
+                $('#date').val(data[3]);
             });
         });
     </script>
